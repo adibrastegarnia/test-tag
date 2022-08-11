@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: 2022-present Intel Corporation
+#
+# SPDX-License-Identifier: Apache-2.0
+
+name: publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  push-docker-images:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name:
+        run: echo ${{ github.ref_name }}
+        env:
+          TAG: ${{ github.ref_name }}
